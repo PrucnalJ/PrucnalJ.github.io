@@ -57,7 +57,6 @@ section h2 {
     font-size: 2em;
     margin-bottom: 20px;
     color: #444;
-    border-bottom: 3px solid #f8d70a;
     padding-bottom: 10px;
     text-align: center;
 }
@@ -76,7 +75,6 @@ section h3 {
     color: #444;
     background-color: rgba(248, 215, 10, 0.1);
     padding: 10px;
-    border-left: 5px solid #f8d70a;
     border-radius: 5px;
 }
 
