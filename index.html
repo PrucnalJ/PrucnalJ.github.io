@@ -1,112 +1,383 @@
 <!DOCTYPE html>
-<!-- <html </html> this is and example of a tag-->
-
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jacek Prucnal's Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>Jacek Prucnal — Software Engineer</title>
+<meta name="description" content="Software engineer in Pittsburgh. Co-Founder &amp; CTO at Title, building production RCS messaging infrastructure. Founder of FishHook. Computer Science at Duquesne, graduating December 2026.">
+<meta name="author" content="Jacek Prucnal">
 
-    <link rel="stylesheet" href="../styles.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jacek Prucnal — Software Engineer">
+<meta property="og:description" content="Co-Founder &amp; CTO at Title. Founder of FishHook. Shipping production systems from Pittsburgh.">
+<meta property="og:image" content="img/og-fallback.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
-    <style>
-header {
-      background-image: url("AboutMe.jpg");
-}
-        
-section h2 {
-    border-bottom: 3px solid #c312d7;
-}
-
-section h3 {
-    border-left: 5px solid #c312d7;
-}
-p {
-    text-align: center;
-}
-
-    </style>
-
-
-
-
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>
+/* Runs before first paint: resolves the theme so light-mode users never see a
+   dark flash, and marks the document as script-enabled so scroll reveals may
+   hide their targets. The timeout is a failsafe — if script.js never arrives,
+   the `js` class is dropped and all content becomes visible again. */
+(function(){
+  var d = document.documentElement;
+  try {
+    var s = localStorage.getItem("theme");
+    d.setAttribute("data-theme",
+      s || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
+  } catch (e) {}
+  d.classList.add("js");
+  setTimeout(function(){ if (!window.__revealReady) d.classList.remove("js"); }, 2500);
+})();
+</script>
 </head>
-    <body>
-        <!-- Header Tag-->
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="Projects.html">My Projects</a></li>
-                    <li><a href="WorkExperience.html">Work Experience</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
-                    
-                </ul>
-            </nav>
-            <h1>JACEK PRUCNAL'S WEBSITE</h1>
-         </header>
+<body>
 
-         <section>
-                <h2 style="background-color: rgba(128, 128, 128, 0.212);">About Me</h2>
-                <p>
-                <img src="Aboutme.png" width="300" height="300" alt="Picture of Jacek Prucnal">
-            </p>
-                    <p>
-                    Hi, I'm Jacek Prucnal, a computer science student at Duquesne University. Ever since I was a kid, I've been fascinated by computers and how they work, which naturally led me to choose computer science as my major. My curiosity has driven me to learn various skills, including coding this website and exploring how computers are made. This passion continues to inspire me to dive deeper into the world of technology.
-                    </p>
-        </section>
+<a class="skip-link" href="#work">Skip to work</a>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
-         <section>
-            <h2 style="background-color: rgba(128, 128, 128, 0.212);">Hobbies</h2>
+<header class="nav">
+  <a class="nav__mark" href="#top"><span>JP</span></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#stack">Stack</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path class="i-moon" d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/>
+      <g class="i-sun"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/></g>
+    </svg>
+  </button>
+  <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span>
+  </button>
+</header>
 
-            <h3 style="background-color: rgba(128, 128, 128, 0.212);">Spending Time With Family/Friends</h3>
-            <img src="Family.jpg" width="300" height="300" alt="Picture of me with family/friends">
-            <img src="Friends.JPG" width="300" height="300" alt="Picture of me with family/friends">
-            <img src="GF.JPG" width="300" height="300" alt="Picture of me with family/friends">
-            <p>
-                I love spending time with my friends and family, and having fun together is a big part of my life. I believe that staying close with loved ones is incredibly important, and I cherish all the good memories we've created, even during tough times. The bonds we share and the joy we bring each other make those moments unforgettable and valuable.
-            </p>
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Mobile">
+    <a href="#work"><em>01</em> Work</a>
+    <a href="#experience"><em>02</em> Experience</a>
+    <a href="#stack"><em>03</em> Stack</a>
+    <a href="#offline"><em>04</em> Offline</a>
+    <a href="#contact"><em>05</em> Contact</a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:jacekpprucnal@gmail.com">jacekpprucnal@gmail.com</a>
+    <div class="menu__social">
+      <a href="https://github.com/PrucnalJ" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/jacekprucnal/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="Prucnal_Resume.pdf">Résumé</a>
+    </div>
+  </div>
+</div>
 
-            <h3 style="background-color: rgba(128, 128, 128, 0.212);">Coding</h3>
-            <img src="Coding3.png" width="300" height="300";" alt="Picture of me coding">
-            <p>
-                I've always been fascinated by computers and how they work. From a young age, I've been drawn to problem-solving, and coding has been the perfect outlet for this passion. It's a hobby that not only satisfies my curiosity about technology but also allows me to tackle complex challenges and create innovative solutions. For me, coding is more than just a skill; it's a fulfilling way to channel my problem-solving abilities and continue exploring the endless possibilities of the digital world.
-            </p>
+<main>
 
-            <h3 style="background-color: rgba(128, 128, 128, 0.212);">Fishing</h3>
-            <img src="Fishing.png" width="300" height="300" alt="Picture of me fishing">
-            <img src="Fishing2.jpg" width="300" height="300" alt="Picture of me fishing">
-            <p>
-                As a kid, I’ve always had a passion for fishing, and that love has stayed with me into adulthood. Fishing has always been a fun and relaxing hobby for me, offering a perfect escape and a way to clear my mind. Whether it’s the quietude of the early morning or the thrill of a catch, it’s a timeless activity that brings me joy and peace.
-            </p>
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
 
-            <h3 style="background-color: rgba(128, 128, 128, 0.212);">Snowboarding</h3>
-            <img src="Snowboarding.JPG" width="300" height="300" alt="Picture of me snowboarding">
-            <p>
-                I've always loved snowboarding; there's something exhilarating about gliding through the snow down a beautiful mountain that really gets to me. The thrill of carving through fresh powder and the breathtaking scenery combine to make snowboarding an incredible experience. It’s a perfect blend of adventure and tranquility that I can’t get enough of.
-            </p>
+  <p class="status" data-anim="1">
+    <span class="status__dot" aria-hidden="true"></span>
+    Graduating December 2026 · open to new-grad software engineering roles
+  </p>
 
-            <h3 style="background-color: rgba(128, 128, 128, 0.212);">Golfing</h3>
-            <img src="Golf1.JPG" width="300" height="300" alt="Picture of golfing">
-            <img src="Golf2.jpeg" width="300" height="300" alt="Picture of golfing">
-            <p>
-                I’ve always had a love for golf, even though I was never the best at it. What made it special was the fun I had playing with my family and friends. It’s a great way to spend time together, share laughs, and enjoy the game, regardless of skill level. The joy of those moments on the course always stands out to me.
-            </p>
+  <h1 class="hero__name">
+    <span class="line" data-anim="2"><span>JACEK</span></span>
+    <span class="line" data-anim="3"><span>PRUCNAL</span></span>
+  </h1>
 
+  <div class="hero__body">
+    <p class="hero__lead" data-anim="4">
+      I build and ship production software. Right now that means
+      <strong>RCS messaging infrastructure</strong> used by real businesses, a
+      <strong>consumer fishing app</strong> live on both app stores, and
+      <strong>AI tooling</strong> inside a Fortune 500 steel company — while finishing my CS degree.
+    </p>
+    <dl class="hero__meta" data-anim="5">
+      <div><dt>Role</dt><dd>Co-Founder &amp; CTO, Title</dd></div>
+      <div><dt>Based</dt><dd>Pittsburgh, PA</dd></div>
+      <div><dt>School</dt><dd>Duquesne University, B.S. CS</dd></div>
+    </dl>
+    <div class="hero__cta" data-anim="6">
+      <a class="btn btn--primary" href="mailto:jacekpprucnal@gmail.com">
+        Get in touch
+        <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M6 3h7v7"/></svg>
+      </a>
+      <a class="btn" href="https://github.com/PrucnalJ" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/jacekprucnal/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="Prucnal_Resume.pdf">Résumé</a>
+    </div>
+  </div>
 
-        </section>
-         <footer>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="Projects.html">My Projects</a></li>
-                    <li><a href="WorkExperience.html">Work Experience</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
-                    
-                </ul>
-            </nav>
-         </footer>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>TypeScript</span><i></i><span>Next.js</span><i></i><span>React</span><i></i><span>PostgreSQL</span><i></i><span>Supabase</span><i></i><span>Python</span><i></i><span>C#/.NET</span><i></i><span>Inngest</span><i></i><span>Stripe</span><i></i><span>Capacitor</span><i></i><span>PyTorch</span><i></i><span>Claude API</span><i></i><span>MCP</span><i></i><span>Docker</span><i></i><span>Mapbox</span><i></i><span>TypeScript</span><i></i><span>Next.js</span><i></i><span>React</span><i></i><span>PostgreSQL</span><i></i><span>Supabase</span><i></i><span>Python</span><i></i><span>C#/.NET</span><i></i><span>Inngest</span><i></i><span>Stripe</span><i></i><span>Capacitor</span><i></i><span>PyTorch</span><i></i><span>Claude API</span><i></i><span>MCP</span><i></i><span>Docker</span><i></i><span>Mapbox</span><i></i>
+    </div>
+  </div>
+</section>
 
-    </body>
+<!-- ============ STATS ============ -->
+<section class="stats" aria-label="By the numbers">
+  <div class="stat reveal">
+    <span class="stat__num" data-count="315" data-suffix="K">315K</span>
+    <span class="stat__label">Lines of TypeScript in production</span>
+  </div>
+  <div class="stat reveal">
+    <span class="stat__num" data-count="289">289</span>
+    <span class="stat__label">Production API endpoints</span>
+  </div>
+  <div class="stat reveal">
+    <span class="stat__num" data-count="1.3" data-decimals="1" data-suffix="M">1.3M</span>
+    <span class="stat__label">Fishing spots mapped worldwide</span>
+  </div>
+  <div class="stat reveal">
+    <span class="stat__num" data-count="472">472</span>
+    <span class="stat__label">Monthly active users, 9+ countries</span>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="section" id="work">
+  <div class="section__head reveal">
+    <p class="eyebrow">01 — Selected work</p>
+    <h2 class="section__title">Things I&rsquo;ve<br>shipped</h2>
+  </div>
+
+  <article class="proj reveal spotlight">
+    <div class="proj__aside">
+      <span class="proj__idx">01</span>
+      <span class="proj__year">Oct 2025 — Present</span>
+    </div>
+    <div class="proj__main">
+      <header class="proj__head">
+        <h3 class="proj__name">Title</h3>
+        <a class="proj__link" href="https://titlebm.com" target="_blank" rel="noopener">
+          titlebm.com <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M6 3h7v7"/></svg>
+        </a>
+      </header>
+      <p class="proj__role">Co-Founder &amp; CTO</p>
+      <p class="proj__desc">
+        An RCS Business Messaging platform that lets brands send rich, verified, interactive
+        messages straight into the native inbox. I lead architecture and write most of the code.
+      </p>
+      <ul class="proj__points">
+        <li><b>~315K lines of TypeScript</b> across 289 API endpoints, a 124-table Postgres schema with row-level security, and 18 Inngest background jobs.</li>
+        <li>A <b>provider-agnostic RCS/SMS abstraction layer</b> over Pinnacle, Twilio and four SMS carriers — per-brand credential resolution, template caching, HMAC signature verification and TCPA-compliant keyword handling.</li>
+        <li><b>&ldquo;Studio&rdquo;</b>, a React Flow visual automation engine with branching, delays, recurring schedules and inbound webhook triggers, compiled through a Zod-validated <code>FlowIntent</code> contract with an AI self-repair loop.</li>
+        <li>An <b>AI agent on the Claude API (42 tools)</b> and an <b>MCP server (39 tools, OAuth 2.1 + PKCE)</b> with an eval harness for regression testing — external AI assistants can operate the platform end to end.</li>
+        <li><b>13+ integrations</b> (HubSpot, Shopify, Clover, Mindbody, a GoHighLevel marketplace app) plus full Stripe billing with a credit ledger, auto-reload and usage analytics.</li>
+      </ul>
+      <ul class="tags">
+        <li>Next.js</li><li>TypeScript</li><li>Supabase</li><li>Postgres RLS</li><li>Inngest</li><li>Stripe</li><li>Claude API</li><li>MCP</li><li>React Flow</li><li>Zod</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj reveal spotlight">
+    <div class="proj__aside">
+      <span class="proj__idx">02</span>
+      <span class="proj__year">May 2026 — Present</span>
+    </div>
+    <div class="proj__main">
+      <header class="proj__head">
+        <h3 class="proj__name">FishHook</h3>
+        <a class="proj__link" href="https://fishhookonline.com" target="_blank" rel="noopener">
+          fishhookonline.com <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M6 3h7v7"/></svg>
+        </a>
+      </header>
+      <p class="proj__role">Founder &amp; Solo Full-Stack Developer</p>
+      <p class="proj__desc">
+        A consumer fishing app on iOS, Android and web — designed, built and shipped entirely solo,
+        from the ingestion pipelines to the App Store listing.
+      </p>
+      <ul class="proj__points">
+        <li>One codebase — a <b>Next.js 16 / React 19 / TypeScript PWA</b> wrapped with Capacitor — live on the App Store, Google Play and the web. <b>~83K lines, 577 commits in four months.</b></li>
+        <li><b>Approaching 1,000 registered users across 9+ countries with zero paid marketing</b>; 472 monthly active and ~490 signups in the trailing 30 days.</li>
+        <li>A worldwide fishing-spot database of <b>~1.3M map pins across 65 countries</b>, built from custom OpenStreetMap, USGS and NOAA ingestion pipelines, with grid-sampled pin tiles and Postgres RPCs for fast national-zoom loads.</li>
+        <li>A self-hosted <b>AI fish-identification service</b> — a two-stage YOLO detector feeding an 866-species PyTorch classifier, on scale-to-zero infrastructure that costs about nothing at idle.</li>
+        <li>Passed <b>Apple and Google review on first submission</b> by shipping the full UGC-compliance surface: Sign in with Apple, blocking, reporting, account deletion and age gating.</li>
+      </ul>
+      <ul class="tags">
+        <li>Next.js 16</li><li>React 19</li><li>Capacitor</li><li>PWA</li><li>Postgres</li><li>PyTorch</li><li>YOLO</li><li>Mapbox</li><li>OpenStreetMap</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj reveal spotlight">
+    <div class="proj__aside">
+      <span class="proj__idx">03</span>
+      <span class="proj__year">Jun 2025 — Present</span>
+    </div>
+    <div class="proj__main">
+      <header class="proj__head">
+        <h3 class="proj__name">Internal Tooling &amp; AI Enablement</h3>
+        <span class="proj__link proj__link--static">U.S. Steel, Research &amp; Technology</span>
+      </header>
+      <p class="proj__role">Software Engineer Intern</p>
+      <p class="proj__desc">
+        Internal engineering at a Fortune 500 steel producer&rsquo;s research center — plus becoming
+        the facility&rsquo;s go-to person for AI.
+      </p>
+      <ul class="proj__points">
+        <li>Designed and built an <b>internal materials-tracking system</b> end to end as the sole developer, integrating it into an existing enterprise platform.</li>
+        <li>Architected and deployed a production <b>read-only MCP server in C#/.NET</b> giving approved AI assistants tightly-scoped access to internal data, with query- and connection-level safeguards.</li>
+        <li>Served as the research facility&rsquo;s <b>primary AI resource</b>: trained staff on Claude and AI tooling, built an internal AI guides page, and presented at company Tech Talks.</li>
+        <li>Led the team&rsquo;s <b>migration to Git</b>, modernized legacy code, and contributed to AI strategy and data-integration initiatives.</li>
+      </ul>
+      <ul class="tags">
+        <li>C#/.NET</li><li>MCP</li><li>SQL Server</li><li>VB.NET</li><li>Git</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="section__head reveal">
+    <p class="eyebrow">02 — Experience</p>
+    <h2 class="section__title">Where I&rsquo;ve<br>worked</h2>
+  </div>
+
+  <ol class="timeline">
+    <li class="tl reveal">
+      <span class="tl__when">Oct 2025 — Present</span>
+      <div class="tl__what">
+        <h3>Co-Founder &amp; Chief Technology Officer</h3>
+        <p class="tl__org">Title Software Inc. · Pittsburgh, PA</p>
+        <p>Own the technical direction and the majority of the codebase for a production RCS business-messaging platform serving real brands.</p>
+      </div>
+    </li>
+    <li class="tl reveal">
+      <span class="tl__when">Jun 2025 — Present</span>
+      <div class="tl__what">
+        <h3>Software Engineer Intern</h3>
+        <p class="tl__org">U.S. Steel, Research &amp; Technology Center · Munhall, PA · Hybrid</p>
+        <p>Internal tooling, a production .NET MCP server, and leading AI enablement across the research facility.</p>
+      </div>
+    </li>
+    <li class="tl reveal">
+      <span class="tl__when">Dec 2024 — Dec 2025</span>
+      <div class="tl__what">
+        <h3>Co-Founder &amp; Backend Lead</h3>
+        <p class="tl__org">Effective Business Automations · Pittsburgh, PA</p>
+        <p>Built automations that removed repetitive, time-consuming work for small businesses, turning manual processes into reliable workflows. Handled the backend end to end.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="section" id="stack">
+  <div class="section__head reveal">
+    <p class="eyebrow">03 — Toolkit</p>
+    <h2 class="section__title">What I<br>work with</h2>
+  </div>
+
+  <div class="skills">
+    <div class="skillset reveal">
+      <h3>Languages</h3>
+      <ul class="tags tags--lg"><li>TypeScript</li><li>JavaScript</li><li>Python</li><li>Java</li><li>SQL</li><li>C#</li><li>VB.NET</li><li>HTML/CSS</li></ul>
+    </div>
+    <div class="skillset reveal">
+      <h3>Frameworks &amp; runtime</h3>
+      <ul class="tags tags--lg"><li>Next.js</li><li>React</li><li>React Flow</li><li>Node.js</li><li>Capacitor</li><li>PWA</li><li>.NET</li></ul>
+    </div>
+    <div class="skillset reveal">
+      <h3>Data &amp; infrastructure</h3>
+      <ul class="tags tags--lg"><li>PostgreSQL</li><li>Supabase</li><li>Row-level security</li><li>Inngest</li><li>Stripe</li><li>Docker</li><li>Vercel</li><li>Mapbox</li></ul>
+    </div>
+    <div class="skillset reveal">
+      <h3>AI engineering</h3>
+      <ul class="tags tags--lg"><li>Claude API agents</li><li>MCP server design</li><li>Eval harnesses</li><li>OAuth 2.1 + PKCE</li><li>PyTorch</li><li>YOLO</li><li>Prompt engineering</li></ul>
+    </div>
+  </div>
+
+  <div class="edu reveal">
+    <div class="edu__head">
+      <h3>Duquesne University</h3>
+      <span class="edu__when">Aug 2023 — Dec 2026</span>
+    </div>
+    <p class="edu__deg">B.S. Computer Science</p>
+    <p>Coursework in Artificial Intelligence, Database Management Systems and Web-Based Systems. My capstone documents the architecture of Title, the production platform I build.</p>
+  </div>
+</section>
+
+<!-- ============ OFFLINE ============ -->
+<section class="section section--offline" id="offline">
+  <div class="section__head reveal">
+    <p class="eyebrow">04 — Offline</p>
+    <h2 class="section__title">When I&rsquo;m not<br>at a keyboard</h2>
+  </div>
+  <p class="offline__lead reveal">
+    Mostly outside. Fishing is the one that leaked into my work — I got tired of bad fishing apps
+    and built <a href="https://fishhookonline.com" target="_blank" rel="noopener">FishHook</a> instead.
+  </p>
+  <div class="gallery">
+    <figure class="reveal spotlight">
+      <picture><source srcset="img/fishing.webp" type="image/webp"><img src="img/fishing.jpg" width="1120" height="1400" loading="lazy" decoding="async" alt="Jacek holding a largemouth bass on a rocky lake shoreline"></picture>
+      <figcaption>Fishing — why FishHook exists</figcaption>
+    </figure>
+    <figure class="reveal spotlight">
+      <picture><source srcset="img/snowboarding.webp" type="image/webp"><img src="img/snowboarding.jpg" width="1120" height="1400" loading="lazy" decoding="async" alt="Night snowboarding on a lit slope"></picture>
+      <figcaption>Snowboarding</figcaption>
+    </figure>
+    <figure class="reveal spotlight">
+      <picture><source srcset="img/golf.webp" type="image/webp"><img src="img/golf.jpg" width="1120" height="1400" loading="lazy" decoding="async" alt="On the golf course"></picture>
+      <figcaption>Golf, badly but happily</figcaption>
+    </figure>
+    <figure class="reveal spotlight">
+      <picture><source srcset="img/friends.webp" type="image/webp"><img src="img/friends.jpg" width="662" height="828" loading="lazy" decoding="async" alt="With friends"></picture>
+      <figcaption>Friends and family</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <p class="eyebrow reveal">05 — Contact</p>
+  <h2 class="contact__big reveal">
+    <a href="mailto:jacekpprucnal@gmail.com">
+      Let&rsquo;s build<br>something
+      <svg class="contact__arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M6 3h7v7"/></svg>
+    </a>
+  </h2>
+  <div class="contact__grid reveal">
+    <a class="contact__item" href="mailto:jacekpprucnal@gmail.com">
+      <span class="contact__k">Email</span>
+      <span class="contact__v">jacekpprucnal@gmail.com</span>
+    </a>
+    <a class="contact__item" href="https://www.linkedin.com/in/jacekprucnal/" target="_blank" rel="noopener">
+      <span class="contact__k">LinkedIn</span>
+      <span class="contact__v">/in/jacekprucnal</span>
+    </a>
+    <a class="contact__item" href="https://github.com/PrucnalJ" target="_blank" rel="noopener">
+      <span class="contact__k">GitHub</span>
+      <span class="contact__v">@PrucnalJ</span>
+    </a>
+    <div class="contact__item contact__item--static">
+      <span class="contact__k">Location</span>
+      <span class="contact__v">Pittsburgh, PA</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p>© <span id="yr">2026</span> Jacek Prucnal</p>
+  <p class="foot__note">Hand-coded. No frameworks, no build step, no dependencies.</p>
+  <a class="foot__top" href="#top">Back to top ↑</a>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
 </html>

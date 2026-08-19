@@ -1,0 +1,15 @@
+# Full-resolution source photos + the pre-2026 site. Kept locally, out of the repo.
+_originals/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# scratch preview files
+_shot*.html
+_probe*
+_verify.html
+_diag*.html
+_preview-dark.html
